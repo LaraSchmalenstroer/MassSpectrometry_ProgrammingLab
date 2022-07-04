@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block page %}{{title}}{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<head>
+    <style>
+    table, th, td {border-collapse:collapse; font-size:9pt; border:1px solid black; text-align:left;}
+    </style>
+</head>
+<body>
+<h3>Choose a file format for MS data</h3>
+<div>
+    <form method="POST" action="/">
+        <p>
+        <input type="radio" id="mzml" name="file_type" value="mzml"> mzML File <br>
+        <input type="radio" id="mzxmlt" name="file_type" value="mzxml"> mzXML File <br>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+    <br><br>
+</div>
+{{ import_msg }}
+<br><br>
+{% if values %}
+<div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapse1">View Statistics</a>
+          </h3>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+          <div class="panel-body">
+              {{values | safe }}
+          </div>
+            <div class="panel-footer"></div>
+        </div>
+      </div>
+</div>
+{% endif %}
+<br>
+{% if hits %}
+<div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapse2">Peptide hits</a>
+          </h3>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+          <div class="panel-body">{{hits | safe}}</div>
+            <div class="panel-footer"></div>
+        </div>
+      </div>
+</div>
+{% endif %}
+<br>
+{% if protein %}
+<div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapse3">Proteins</a>
+          </h3>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+          <div class="panel-body">{{protein | safe}}</div>
+            <div class="panel-footer"></div>
+        </div>
+      </div>
+</div>
+{% endif %}
+</body>
+<br><br>
+{% endblock %}
+{% block footer %}
+{{super()}}
+{% endblock %}
